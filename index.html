@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Story Hotels — Luxury Stays in Hyderabad</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root{
+    --ink:#0F1E1B; --ink-soft:#16302A; --ivory:#FAF6EC; --ivory-dim:#F1EAD9;
+    --gold:#C9A24B; --gold-soft:#E7CE93; --teal:#2F5D50;
+    --text-dark:#16221F; --text-mute:#5B6C66;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter',sans-serif;background:var(--ivory);color:var(--text-dark);}
+  .font-display{font-family:'Fraunces',serif;}
+  .font-mono{font-family:'Space Mono',monospace;}
+
+  /* ---------- INTRO ---------- */
+  #intro{
+    position:fixed; inset:0; z-index:9999;
+    background:var(--ink);
+    display:flex; align-items:center; justify-content:center;
+    flex-direction:column;
+    transition:opacity .8s ease, visibility .8s ease;
+  }
+  #intro.fade-out{ opacity:0; visibility:hidden; }
+  .intro-word{ display:flex; overflow:hidden; }
+  .intro-word span{
+    display:inline-block;
+    font-family:'Fraunces',serif;
+    font-size:clamp(2.5rem, 8vw, 5.5rem);
+    color:var(--ivory);
+    opacity:0;
+    transform:translateY(100%);
+    animation:riseIn .7s cubic-bezier(.22,1,.36,1) forwards;
+  }
+  @keyframes riseIn{ to{opacity:1; transform:translateY(0);} }
+  .intro-rule{
+    width:0; height:1px; background:var(--gold);
+    margin-top:22px;
+    animation:drawLine 1s ease forwards;
+    animation-delay:.9s;
+  }
+  @keyframes drawLine{ to{ width:180px; } }
+  .intro-tag{
+    font-family:'Space Mono',monospace;
+    font-size:11px; letter-spacing:.3em; text-transform:uppercase;
+    color:var(--gold-soft); opacity:0; margin-top:16px;
+    animation:fadeUp .6s ease forwards; animation-delay:1.3s;
+  }
+  @keyframes fadeUp{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);} }
+  body.locked{ overflow:hidden; height:100vh; }
+
+  /* ---------- SHARED ---------- */
+  .reveal{ opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.show{ opacity:1; transform:translateY(0); }
+  .hotel-card{ transition:transform .35s ease, box-shadow .35s ease; }
+  .hotel-card:hover{ transform:translateY(-6px); }
+  .nav-blur{ backdrop-filter: blur(10px); background: rgba(15,30,27,0.72); }
+  .ticket-edge::before{
+    content:""; position:absolute; top:-1px; left:0; right:0; height:24px;
+    background-image: radial-gradient(circle at 24px 0, transparent 12px, var(--ivory) 12.5px);
+    background-size: 48px 24px; background-repeat: repeat-x;
+  }
+  select, input{ appearance:none; -webkit-appearance:none; background:transparent; width:100%; }
+  select:focus, input:focus{ outline:none; }
+</style>
+</head>
+<body class="antialiased locked">
+
+<!-- ============ INTRO ============ -->
+<div id="intro">
+  <div class="intro-word" id="introWord"></div>
+  <div class="intro-rule"></div>
+  <div class="intro-tag">Luxury Stays · Hyderabad</div>
+</div>
+
+<!-- ============ NAV ============ -->
+<header class="fixed top-0 left-0 right-0 z-40 nav-blur border-b border-white/10">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <span class="font-display text-2xl" style="color:var(--ivory);">Story <span style="color:var(--gold);">Hotels</span></span>
+    <nav class="hidden md:flex items-center gap-8 text-sm font-medium" style="color:var(--ivory);opacity:.9;">
+      <a href="index.html" class="hover:opacity-100 transition">Home</a>
+      <a href="rooms.html" class="hover:opacity-100 transition">Rooms</a>
+      <a href="about.html" class="hover:opacity-100 transition">About</a>
+      <a href="contact.html" class="hover:opacity-100 transition">Contact</a>
+    </nav>
+    <div class="flex items-center gap-3">
+      <a href="login.html" class="text-sm font-medium" style="color:var(--ivory);opacity:.9;">Login</a>
+      <a href="#search" class="text-sm font-semibold px-4 py-2 rounded-full" style="background:var(--gold);color:var(--ink);">Book Now</a>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section id="home" class="relative min-h-[92vh] flex items-end" style="background:var(--ink);">
+  <div class="absolute inset-0 overflow-hidden">
+    <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?q=80&w=2000&auto=format&fit=crop" class="w-full h-full object-cover opacity-55" alt="">
+    <div class="absolute inset-0" style="background:linear-gradient(180deg, rgba(15,30,27,.25) 0%, rgba(15,30,27,.55) 55%, var(--ink) 100%);"></div>
+  </div>
+  <div class="relative max-w-7xl mx-auto px-6 pt-40 pb-40 w-full">
+    <p class="font-mono text-xs tracking-[0.25em] uppercase mb-5" style="color:var(--gold-soft);">Gachibowli · Hitech City · Banjara Hills</p>
+    <h1 class="font-display leading-[1.02] text-5xl md:text-7xl max-w-3xl" style="color:var(--ivory);">Welcome to<br>Story Hotels.</h1>
+    <p class="mt-6 text-lg max-w-xl" style="color:var(--ivory);opacity:.82;">Premium hotels across Hyderabad — luxury, comfort, and stays worth remembering.</p>
+    <a href="rooms.html" class="inline-block mt-8 px-7 py-3 rounded-full font-semibold text-sm" style="background:var(--gold);color:var(--ink);">Explore Rooms</a>
+  </div>
+</section>
+
+<!-- ============ SEARCH TICKET ============ -->
+<section id="search" class="relative -mt-24 z-10 px-6">
+  <div class="max-w-5xl mx-auto">
+    <div class="relative ticket-edge rounded-[28px] shadow-2xl border border-gray-200" style="background:var(--ivory);">
+      <div class="grid grid-cols-1 md:grid-cols-[1fr_1fr_1fr_1fr_1fr_auto] divide-y md:divide-y-0 md:divide-x divide-black/10 p-2">
+
+        <div class="px-5 py-4">
+          <span class="font-mono text-[10px] tracking-widest uppercase" style="color:var(--text-mute);">Area</span>
+          <select class="mt-1 font-display text-base w-full">
+            <option>Select Area</option>
+            <option>Gachibowli</option>
+            <option>Hitech City</option>
+            <option>Banjara Hills</option>
+          </select>
+        </div>
+
+        <div class="px-5 py-4">
+          <span class="font-mono text-[10px] tracking-widest uppercase" style="color:var(--text-mute);">Hotel</span>
+          <select class="mt-1 font-display text-base w-full">
+            <option>Select Hotel</option>
+            <option>Story Grand, Gachibowli</option>
+            <option>Story Suites, Hitech City</option>
+          </select>
+        </div>
+
+        <div class="px-5 py-4">
+          <span class="font-mono text-[10px] tracking-widest uppercase" style="color:var(--text-mute);">Check-in</span>
+          <input type="date" class="mt-1 font-display text-base">
+        </div>
+
+        <div class="px-5 py-4">
+          <span class="font-mono text-[10px] tracking-widest uppercase" style="color:var(--text-mute);">Check-out</span>
+          <input type="date" class="mt-1 font-display text-base">
+        </div>
+
+        <div class="px-5 py-4">
+          <span class="font-mono text-[10px] tracking-widest uppercase" style="color:var(--text-mute);">Guests</span>
+          <select class="mt-1 font-display text-base w-full">
+            <option>1</option><option>2</option><option>3</option><option>4</option>
+          </select>
+        </div>
+
+        <div class="p-2 flex items-center">
+          <button class="w-full h-full rounded-xl px-8 py-4 font-semibold text-sm tracking-wide" style="background:var(--teal);color:var(--ivory);">🔍 Search Hotels</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FACILITIES ============ -->
+<section id="rooms" class="max-w-7xl mx-auto px-6 pt-28 pb-8">
+  <div class="reveal text-center mb-14">
+    <p class="font-mono text-xs tracking-[0.25em] uppercase" style="color:var(--teal);">What's included</p>
+    <h2 class="font-display text-4xl mt-2">Facilities</h2>
+  </div>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+
+    <div class="reveal text-center p-6 rounded-2xl" style="background:white;">
+      <svg class="mx-auto mb-4" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.6"><path d="M12 20a1.2 1.2 0 100-2.4 1.2 1.2 0 000 2.4Z" fill="var(--teal)"/><path d="M8.5 16.2a5 5 0 017 0M5.2 12.8a9.5 9.5 0 0113.6 0M2 9.5a13.8 13.8 0 0120 0"/></svg>
+      <p class="font-display text-lg">Free WiFi</p>
+    </div>
+
+    <div class="reveal text-center p-6 rounded-2xl" style="background:white;">
+      <svg class="mx-auto mb-4" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.6"><path d="M2 17c1.2 1.2 2.4 1.2 3.6 0 1.2-1.2 2.4-1.2 3.6 0 1.2 1.2 2.4 1.2 3.6 0 1.2-1.2 2.4-1.2 3.6 0 1.2 1.2 2.4 1.2 3.6 0M4 12V6a2 2 0 012-2h1a2 2 0 012 2v6M9 12V9"/></svg>
+      <p class="font-display text-lg">Swimming Pool</p>
+    </div>
+
+    <div class="reveal text-center p-6 rounded-2xl" style="background:white;">
+      <svg class="mx-auto mb-4" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.6"><path d="M6 7v10M18 7v10M3 10h3M18 10h3M3 14h3M18 14h3M8 12h8"/></svg>
+      <p class="font-display text-lg">Fitness Center</p>
+    </div>
+
+    <div class="reveal text-center p-6 rounded-2xl" style="background:white;">
+      <svg class="mx-auto mb-4" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.6"><path d="M5 3v8M8 3v8M5 7h3M6.5 11v10M14 21V11c0-3 2-6 4-8v18"/></svg>
+      <p class="font-display text-lg">Restaurant</p>
+    </div>
+  </div>
+</section>
+
+
+<section class="max-w-7xl mx-auto px-6 py-24">
+<div class="text-center mb-10"><h2 class="font-display text-4xl">Featured Hotels</h2><p>Choose from our most popular properties.</p></div>
+<div class="grid md:grid-cols-3 gap-8">
+<div class="hotel-card rounded-2xl overflow-hidden shadow-lg bg-white"><img src="https://picsum.photos/seed/h1/600/400" class="w-full h-56 object-cover"><div class="p-6"><h3 class="font-display text-2xl">Story Hotel 1</h3><p>Hyderabad ⭐4.1</p><p class="mt-2 font-bold">From ₹3699/night</p><a href="rooms.html" class="inline-block mt-4 px-5 py-2 rounded-full" style="background:#2F5D50;color:#fff;">View Rooms</a></div></div><div class="hotel-card rounded-2xl overflow-hidden shadow-lg bg-white"><img src="https://picsum.photos/seed/h2/600/400" class="w-full h-56 object-cover"><div class="p-6"><h3 class="font-display text-2xl">Story Hotel 2</h3><p>Hyderabad ⭐4.2</p><p class="mt-2 font-bold">From ₹4399/night</p><a href="rooms.html" class="inline-block mt-4 px-5 py-2 rounded-full" style="background:#2F5D50;color:#fff;">View Rooms</a></div></div><div class="hotel-card rounded-2xl overflow-hidden shadow-lg bg-white"><img src="https://picsum.photos/seed/h3/600/400" class="w-full h-56 object-cover"><div class="p-6"><h3 class="font-display text-2xl">Story Hotel 3</h3><p>Hyderabad ⭐4.3</p><p class="mt-2 font-bold">From ₹5099/night</p><a href="rooms.html" class="inline-block mt-4 px-5 py-2 rounded-full" style="background:#2F5D50;color:#fff;">View Rooms</a></div></div><div class="hotel-card rounded-2xl overflow-hidden shadow-lg bg-white"><img src="https://picsum.photos/seed/h4/600/400" class="w-full h-56 object-cover"><div class="p-6"><h3 class="font-display text-2xl">Story Hotel 4</h3><p>Hyderabad ⭐4.4</p><p class="mt-2 font-bold">From ₹5799/night</p><a href="rooms.html" class="inline-block mt-4 px-5 py-2 rounded-full" style="background:#2F5D50;color:#fff;">View Rooms</a></div></div><div class="hotel-card rounded-2xl overflow-hidden shadow-lg bg-white"><img src="https://picsum.photos/seed/h5/600/400" class="w-full h-56 object-cover"><div class="p-6"><h3 class="font-display text-2xl">Story Hotel 5</h3><p>Hyderabad ⭐4.5</p><p class="mt-2 font-bold">From ₹6499/night</p><a href="rooms.html" class="inline-block mt-4 px-5 py-2 rounded-full" style="background:#2F5D50;color:#fff;">View Rooms</a></div></div><div class="hotel-card rounded-2xl overflow-hidden shadow-lg bg-white"><img src="https://picsum.photos/seed/h6/600/400" class="w-full h-56 object-cover"><div class="p-6"><h3 class="font-display text-2xl">Story Hotel 6</h3><p>Hyderabad ⭐4.6</p><p class="mt-2 font-bold">From ₹7199/night</p><a href="rooms.html" class="inline-block mt-4 px-5 py-2 rounded-full" style="background:#2F5D50;color:#fff;">View Rooms</a></div></div></div></section>
+<!-- ============ ABOUT / CONTACT STRIP ============ -->
+<section id="about" class="mt-24 px-6">
+  <div class="reveal max-w-6xl mx-auto rounded-3xl px-10 py-16 text-center relative overflow-hidden" style="background:var(--gold);">
+    <h2 class="font-display text-4xl md:text-5xl" style="color:var(--ink);">Ready for your next stay?</h2>
+    <p class="mt-4 max-w-md mx-auto" style="color:var(--ink);opacity:.75;">Talk to our team or check availability across all Story Hotels properties in Hyderabad.</p>
+    <a href="contact.html" class="inline-block mt-8 px-8 py-4 rounded-full font-semibold text-sm" style="background:var(--ink);color:var(--ivory);">Contact Us</a>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+
+<footer class="mt-16" style="background:#0F1E1B;">
+<div class="max-w-7xl mx-auto px-6 py-14 grid md:grid-cols-4 gap-8">
+<div><h3 style="color:#FAF6EC;font-size:28px;">Story <span style="color:#C9A24B;">Hotels</span></h3><p style="color:#ddd">Luxury stays across Hyderabad.</p></div>
+<div><h4 style="color:#C9A24B;">Quick Links</h4><p><a href="index.html">Home</a><br><a href="rooms.html">Rooms</a><br><a href="about.html">About</a><br><a href="contact.html">Contact</a></p></div>
+<div><h4 style="color:#C9A24B;">Contact</h4><p style="color:#ddd;">support@storyhotels.com<br>+91 98765 43210</p></div>
+<div><h4 style="color:#C9A24B;">Follow</h4><p style="color:#ddd;">Instagram · Facebook · X</p></div>
+</div>
+<div style="border-top:1px solid rgba(255,255,255,.1);padding:20px;text-align:center;color:#aaa;">© 2026 Story Hotels. All Rights Reserved.</div>
+</footer>
+
+
+<script>
+  // Build the intro word letter-by-letter so each letter animates in with a stagger
+  const word = "STORY HOTELS";
+  const introWord = document.getElementById('introWord');
+  [...word].forEach((ch, i) => {
+    const span = document.createElement('span');
+    span.textContent = ch === " " ? "\u00A0\u00A0" : ch;
+    span.style.animationDelay = (i * 0.045) + "s";
+    introWord.appendChild(span);
+  });
+
+  // Hold for 3s total, then fade out intro and unlock scroll
+  window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+      document.getElementById('intro').classList.add('fade-out');
+      document.body.classList.remove('locked');
+      setTimeout(() => document.getElementById('intro').remove(), 850);
+    }, 3000);
+  });
+
+  // Scroll reveal for sections
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); } });
+  }, {threshold:0.15});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
